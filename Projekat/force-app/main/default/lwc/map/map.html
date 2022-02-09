@@ -1,0 +1,10 @@
+<template>
+    <template if:true={show}>
+        <template if:true={hasmarkers}>
+            <lightning-map map-markers={mapMarkers} onmarkerselect={handleMarkerSelect} selected-marker-value={selectedMarkerValue} show-footer=true list-view='visible'> </lightning-map>
+        </template>
+        <template if:false={hasmarkers}>
+            <p class="max">You can't find this product in stores!</p>
+        </template>
+    </template>
+</template>

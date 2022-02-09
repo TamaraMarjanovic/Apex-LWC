@@ -1,0 +1,32 @@
+div.content {
+    height: 100%;
+    width: 100%;
+  }
+
+  div.items {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    overflow: auto;
+    display: grid;
+    grid-template-rows: repeat(2,50%);
+    grid-template-columns: 100%;
+    align-items: start ;
+    justify-items: start;
+  }
+
+  .item{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    align-items: start ;
+    justify-items: start;
+    border: 1px solid gray;
+  }
+  
+  .pclass{
+    margin-left: 10px;
+    overflow-wrap: anywhere;
+  }

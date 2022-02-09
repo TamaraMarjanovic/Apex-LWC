@@ -1,0 +1,153 @@
+<template>
+    <template if:true={show}>
+        <template if:false={showCompare}>
+            <template if:true={idDetail}>
+                <div class="content">
+                    <template if:true={list}>
+                        <div class="first">
+                            <h1 style="margin-left: 10px;">Detail page for {product.Name}</h1>
+                            <lightning-button onclick={handleBack} variant="brand" label="Back" title="Back" class="btnclass"></lightning-button>
+                            <lightning-button onclick={onShowCompare} variant="success" label="Compare" title="Compare" class="btnclass1"></lightning-button>
+                        </div>
+                    </template>
+                    <template if:false={list}>
+                        <div class="first1">
+                            <h1 style="margin-left: 10px;">Detail page for {product.Name}</h1>          
+                        </div>
+                    </template>
+                    <div class="i">
+                        <template if:true={showImg}>
+                            <img class="max12" src={product.DisplayUrl} alt="No Image" border="0"/>
+                        </template>
+
+                        <div class="items">
+                            <div class="i1">
+                                <p class="max">Price: {product.Price__c}</p>
+                                <lightning-button onclick={onBuy} variant="success" label="Buy" title="Buy"></lightning-button>
+                            </div>
+                            <p class="max">Description: {product.Description}</p>
+                            <p class="max">Quantity: {product.Quantity__c}</p>
+                            <p class="max">Color: {product.Color__c}</p>
+                            <p class="max">Dimension: {product.Dimension__c}</p>
+                            <p class="max">Size: {product.Size__c}</p>
+                            <div class="i1">
+                                <p class="max">Rating: {product.Rating__c}</p>
+                                <lightning-button-icon icon-name="utility:adduser" variant="brand" alternative-text="Add review" title="Add review" onclick={onAddReview}></lightning-button-icon>      
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <template if:true={see1}>
+                            <lightning-button variant="brand-outline" label="Available in stores" title="Available in stores" onclick={onShowMap} class="slds-m-left_x-small max1 see1" ></lightning-button>
+                        </template>
+                        <template if:true={see}>
+                            <lightning-button variant="brand-outline" label="See all reviews" title="See all reviews" onclick={handleAllReviews} class="slds-m-left_x-small max1 see"></lightning-button>
+                        </template>
+                    </div> 
+                    <template if:true={seeReviews}>
+                        <c-reviews reviews={reviews} class="max3"></c-reviews>
+                    </template>
+                    <template if:true={seeMap}>
+                        <c-map pr="true" class="max3" id-p={idDetail}></c-map>
+                    </template>
+                </div>
+            </template>
+        </template>
+        <template if:true={showCompare}>
+            <div class="content1">
+                <c-compare listac={listac} num={num} ongoback={handleGoBack2}></c-compare>
+            </div>
+        </template>
+        <template if:false={idDetail}>
+            <div class="content1">
+                <p class="content2">No similar product</p>
+            </div>
+        </template>
+    </template>
+    <template if:true={showBuy}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModalBuy}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-id-2" class="slds-text-heading_medium slds-hyphenate">Select the quantity you want to buy</h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                    <div class="items1">
+                        <template for:each={listaBuy} for:item="x">
+                            <div key={x.Id} class="item1">
+                                <div class="items2">
+                                    <p class="pclass1">Product: {x.Name}</p>
+                                    <p class="pclass1">Price: {x.Price}</p>
+                                </div>
+                                <input class="pclass1" type="number" min="1" max={x.Quantity} value={x.Num} onchange={onChangeNum} data-id={x.Id} data-price={x.Price} data-quantity={x.Quantity}>
+                            </div>
+                        </template>
+                        <p class="pclass2">Total price: {total}</p>
+                    </div>
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModalBuy} title="Cancel">Cancel</button>
+                    <button class="slds-button slds-button_success" onclick={addToChart}>Add to cart</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={showReview}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModalReview}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-id-4" class="slds-text-heading_medium slds-hyphenate">Add review</h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-5">
+                    <div class="review">
+                        <h6 class="slds-text-heading_medium slds-m-bottom_medium">Share details of your own experience with this product</h6>
+                        <div class="rate">
+                            <input type="radio" id="star5" name="rate" value="5" onclick={onChangeRate} class="five" />
+                            <label for="star5" title="Five">5 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4" onclick={onChangeRate} class="four" />
+                            <label for="star4" title="Four">4 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3" onclick={onChangeRate} class="three" />
+                            <label for="star3" title="Three">3 stars</label>
+                            <input type="radio" id="star2" name="rate" value="2" onclick={onChangeRate} class="two" />
+                            <label for="star2" title="Two">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1" onclick={onChangeRate} class="one" />
+                            <label for="star1" title="One">1 star</label>
+                        </div>
+                        <div class="slds-m-top_medium slds-m-bottom_x-large">
+                            <div class="slds-p-around_medium lgc-bg">
+                                <textarea id="w3review" name="w3review" rows="6" cols="70" placeholder="Enter comment" onchange={onChangeComm}>{comm}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModalReview} title="Cancel">Cancel</button>
+                    <button class="slds-button slds-button_success" onclick={onAddReview1}>Add review</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

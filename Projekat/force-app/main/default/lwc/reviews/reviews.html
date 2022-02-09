@@ -1,0 +1,13 @@
+<template>
+    <div class="content">
+        <div class="items">
+            <template for:each={reviews} for:item="x">
+                <div key={x.id} class="item">
+                    <p class="pclass" >User: {x.User__r.Name}</p>
+                    <p class="pclass" >Rating: {x.Rating__c}</p>
+                    <p class="pclass" >Comment: {x.Comment__c}</p>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

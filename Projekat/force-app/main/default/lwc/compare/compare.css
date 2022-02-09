@@ -1,0 +1,46 @@
+div.content {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-rows: 10% 90%;
+    align-items: start ;
+    justify-items: start;
+  }
+
+  .first{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 85% auto;
+    align-items: center ;
+    justify-items: start;
+  }
+
+  .btn{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+  }
+
+  div.content1 {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    overflow: auto;
+    grid-template-columns: minmax(300px,33.333%) minmax(300px,33.333%) minmax(300px,33.333%);
+    grid-template-rows: 100%;
+    align-items: start ;
+    justify-items: start;
+  }
+
+  .max{
+    height: 100%;
+    width: 100%;
+  }
+  
+  .btnclass1{
+    justify-self: center;
+  }

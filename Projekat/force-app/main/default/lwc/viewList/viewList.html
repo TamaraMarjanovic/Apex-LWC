@@ -1,0 +1,94 @@
+<template>
+    <template if:false={showDetail}>
+        <template if:false={showCompare}>
+            <div class="content">
+                <div class="first">
+                    <div class="first1"> 
+                        <h1 style="margin-left: 10px;">List of products: </h1>
+                        <div class="slds-p-around_medium lgc-bg">
+                            <lightning-button-menu alternative-text="Show menu">
+                                <lightning-menu-item value="asc" label="Sort by ascending price" onclick={handleOnClickAsc}></lightning-menu-item>
+                                <lightning-menu-item value="desc" label="Sort by descending price" onclick={handleOnClickDesc}></lightning-menu-item>
+                                <lightning-menu-item value="ascnum" label="Sort by ascending number of views " onclick={handleOnClickAscNum}></lightning-menu-item>
+                                <lightning-menu-item value="descnum" label="Sort by descending number of views " onclick={handleOnClickDescNum}></lightning-menu-item>
+                                <lightning-menu-item value="rating" label="Sort by rating" onclick={handleOnClickRating}></lightning-menu-item>
+                            </lightning-button-menu>
+                        </div>
+                    </div>
+                    <lightning-button onclick={handleGoBack3} variant="brand" label="Back" title="Back"></lightning-button>
+                    <lightning-button onclick={onBuy} variant="success" label="Buy" title="Buy"></lightning-button>
+                    <lightning-button onclick={onShowCompare} variant="success" label="Compare" title="Compare"></lightning-button>
+                </div>
+                <div class="item">
+                    <p class="max"></p>
+                    <p class="max">Name:</p>
+                    <p class="max">Description:</p>
+                    <p class="max">Image:</p>
+                    <p class="max">Price:</p>
+                    <p class="max">Rating:</p>
+                </div>
+                <div class="items">
+                    <template for:each={lista} for:item="x">
+                        <div key={x.id} class="item" data-id={x.Id}>
+                            <lightning-input class="checkboxc" type="checkbox" onclick={handleOnClickCheckBox} data-id={x.Id} data-name={x.Name} data-quantity={x.Quantity__c} data-price={x.Price__c}></lightning-input>
+                            <p class="pclass ellipsis" onclick={onShowDetail} data-id={x.Id}>{x.Name}</p>
+                            <p class="pclass ellipsis" onclick={onShowDetail} data-id={x.Id}>{x.Description}</p>
+                            <img class="imgclass" onclick={onShowDetail} data-id={x.Id} src={x.DisplayUrl} alt="No Image available" border="0"/>
+                            <p class="pclass " onclick={onShowDetail} data-id={x.Id}>{x.Price__c}</p>
+                            <p class="pclass" onclick={onShowDetail} data-id={x.Id}>{x.Rating__c}</p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </template>
+    <template if:true={showDetail}>
+        <div class="content1">
+            <c-detail id-detail={idDetail} ongoback={handleGoBack} list="true"></c-detail>
+        </div>
+    </template>
+    <template if:true={showCompare}>
+        <div class="content1">
+            <c-compare listac={listac} num={num} ongoback={handleGoBack2}></c-compare>
+        </div>
+    </template>
+    <template if:true={showBuy}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModalBuy}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-id-2" class="slds-text-heading_medium slds-hyphenate">Select the quantity you want to buy</h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                    <div class="items1">
+                        <template for:each={listaBuy} for:item="x">
+                            <div key={x.Id} class="item1">
+                                <div class="items2">
+                                    <p class="pclass1">Product: {x.Name}</p>
+                                    <p class="pclass1">Price: {x.Price}</p>
+                                </div>
+                                <input class="pclass1" type="number" min="1" max={x.Quantity} value={x.Num} onchange={onChangeNum} data-id={x.Id} data-price={x.Price} data-quantity={x.Quantity}>
+                            </div>
+                        </template>
+                        <p class="pclass2">Total price: {total}</p>
+                    </div>
+                </div>
+                <!-- Modal/Popup Box LWC footer starts here -->
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModalBuy} title="Cancel">Cancel</button>
+                    <button class="slds-button slds-button_success" onclick={addToChart}>Add to cart</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

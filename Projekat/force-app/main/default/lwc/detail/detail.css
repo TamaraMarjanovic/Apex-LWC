@@ -1,0 +1,217 @@
+.content2 {
+    margin-left: 30%;
+    margin-top: 30%;
+  }
+
+  div.content {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-rows: minmax(40px, 10%) minmax(300px, 80%) minmax(40px, 10%) 0%;
+    align-items: start ;
+    justify-items: start;
+  }
+
+  .first{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 69% auto auto;
+    align-items: center ;
+    justify-items: start;
+  }
+
+  .btnclass{
+    justify-self: end;
+  }
+
+  .btnclass1{
+    justify-self: center;
+  }
+
+  .first1{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 100%;
+    align-items: center ;
+    justify-items: start;
+  }
+
+  .marg1{
+    margin-left: 30%;
+  }
+
+  .marg2{
+    margin-left: 55%;
+  }
+
+  .btn{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+  }
+
+  div.i {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: minmax(auto, 20%) minmax(auto, 80%);
+    grid-template-rows: 100%;
+    align-items: start ;
+    justify-items: start;
+  }
+
+  div.i1 {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: minmax(auto, 25%) minmax(auto, 75%);
+    grid-template-rows: 100%;
+    align-items: start ;
+    justify-items: start;
+  }
+
+  div.items {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    overflow: auto;
+    display: grid;
+    grid-template-rows: repeat(9,10%);
+    align-items: start ;
+    justify-items: start;
+  }
+
+  .max{
+    margin-left: 10px;
+    height: 100%;
+  }
+
+  .max1{
+    margin-left: 10px;
+    height: auto;
+    width: auto;
+  }
+
+  .max12{
+    justify-self: center;
+    margin-left: 10px;
+    height: auto;
+    width: auto;
+  }
+
+  .max2{
+    margin-left: 10px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 80px 80px;
+    align-items: start ;
+    justify-items: start;
+  }
+
+  .max3{
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+  }
+
+  .content1{
+    height: 100%;
+    width: 100%;
+  }
+  
+  div.items1 {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    overflow: auto;
+    display: grid;
+    grid-template-rows: repeat(1,100px);
+    align-items: start ;
+    justify-items: start;
+  }
+
+  .item1{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 100% ;
+    align-items: start ;
+    justify-items: start;
+  }
+
+  div.items2 {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    overflow: auto;
+    display: grid;
+    grid-template-rows: 50% 50%;
+    align-items: start ;
+    justify-items: start;
+  }
+
+  div.review {
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    overflow: auto;
+    display: grid;
+    grid-template-rows: 15% 15% 70%;
+    align-items: center ;
+    justify-items: center;
+  }
+
+  .buttons{
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: start ;
+    justify-items: start;
+  }
+
+  .rate {
+      float: left;
+      height: 46px;
+      padding: 0 10px;
+  }
+  .rate:not(:checked) > input {
+      position:absolute;
+      top:-9999px;
+  }
+  .rate:not(:checked) > label {
+      float:right;
+      width:1em;
+      overflow:hidden;
+      white-space:nowrap;
+      cursor:pointer;
+      font-size:30px;
+      color:#ccc;
+  }
+  .rate:not(:checked) > label:before {
+      content: '★ ';
+  }
+  .rate > input:checked ~ label {
+      color: #ffc700;    
+  }
+  .rate:not(:checked) > label:hover,
+  .rate:not(:checked) > label:hover ~ label {
+      color: #deb217;  
+  }
+  .rate > input:checked + label:hover,
+  .rate > input:checked + label:hover ~ label,
+  .rate > input:checked ~ label:hover,
+  .rate > input:checked ~ label:hover ~ label,
+  .rate > label:hover ~ input:checked ~ label {
+      color: #c59b08;
+  }
